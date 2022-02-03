@@ -22,7 +22,7 @@ public class PasswordRecoverPage {
         emailField.sendKeys(email);
     }
 
-    public void clickRegisterButton() {
+    public void clickRecoverButton() {
         recoverPasswordButton.click();
     }
 
