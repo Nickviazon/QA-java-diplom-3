@@ -27,8 +27,11 @@ public class RegisterPage {
     private SelenideElement loginLink;
 
     public void setFields(String name, String email, String password) {
+        nameField.click();
         nameField.sendKeys(name);
+        emailField.click();
         emailField.sendKeys(email);
+        passwordField.click();
         passwordField.sendKeys(password);
     }
 

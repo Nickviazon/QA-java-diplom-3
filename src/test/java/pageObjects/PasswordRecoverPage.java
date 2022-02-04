@@ -19,6 +19,7 @@ public class PasswordRecoverPage {
     private SelenideElement loginLink;
 
     public void setEmailField(String email) {
+        emailField.click();
         emailField.sendKeys(email);
     }
 

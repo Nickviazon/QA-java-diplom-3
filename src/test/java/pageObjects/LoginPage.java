@@ -6,7 +6,7 @@ import org.openqa.selenium.support.How;
 
 public class LoginPage {
 
-    // Поле ввода имени
+    // Поле ввода email
     @FindBy(how = How.CSS, using = "div>input[name='name']")
     private SelenideElement emailField;
 
@@ -27,7 +27,9 @@ public class LoginPage {
     private SelenideElement forgotPasswordLink;
 
     public void setEmailAndPasswordFields(String email, String password) {
+        emailField.click();
         emailField.sendKeys(email);
+        passwordField.click();
         passwordField.sendKeys(password);
     }
 
