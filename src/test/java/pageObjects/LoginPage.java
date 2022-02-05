@@ -2,22 +2,19 @@ package pageObjects;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-import java.time.Duration;
-
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.sleep;
+
 
 public class LoginPage extends BasePage {
 
     // Поле ввода email
     @FindBy(how = How.XPATH, using = ".//div[label[text()='Email']]/input")
     private SelenideElement emailField;
-
-    @FindBy (how = How.XPATH, using = ".//div[contains(@class, 'input_status_active')]/input")
-    private SelenideElement activeEmailField;
 
     // Поле ввода пароля
     @FindBy(how = How.CSS, using = "div>input[name='Пароль']")
@@ -37,14 +34,25 @@ public class LoginPage extends BasePage {
 
     public void setEmailAndPasswordFields(String email, String password) {
         sleep(500);
-        emailField.click();
-        activeEmailField.sendKeys(email);
-        passwordField.click();
-        passwordField.sendKeys(password);
+        // борьба с автозаполнением данных у Ябраузера
+        // (сейчас бы автоматическое сохранение/заполнение  логина-пароля пихать без подтверждения пользователя)
+        // .clear() не срабатывает в Ябраузере, поле остается автозаполненым, пришлось обходить
+        if (emailField.getText() != null) {
+            emailField.shouldBe(and("can be clickable", exist, visible, enabled)).click();
+            emailField.sendKeys(Keys.CONTROL + "a");
+            emailField.sendKeys(Keys.DELETE);
+        }
+        emailField.setValue(email);
+        if (emailField.getText() != null) {
+            passwordField.click();
+            passwordField.sendKeys(Keys.CONTROL + "a");
+            passwordField.sendKeys(Keys.DELETE);
+        }
+        passwordField.setValue(password);
     }
 
     public void clickEnterButton() {
-        enterButton.click();
+        enterButton.shouldBe(exist).click();
     }
 
     public void clickRegisterLink() {

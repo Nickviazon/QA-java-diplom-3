@@ -32,12 +32,13 @@ public class RegisterPage extends BasePage {
     private SelenideElement loginLink;
 
     public void setFields(String name, String email, String password) {
-        nameField.click();
-        nameField.sendKeys(name);
+        nameField.shouldBe(Condition.exist).click();
+        nameField.clear();
+        nameField.setValue(name);
         emailField.click();
-        emailField.sendKeys(email);
+        emailField.setValue(email);
         passwordField.click();
-        passwordField.sendKeys(password);
+        passwordField.setValue(password);
     }
 
     public void clickRegisterButton() {

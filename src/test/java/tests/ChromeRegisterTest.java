@@ -1,11 +1,13 @@
 package tests;
 
 
+import com.codeborne.selenide.Configuration;
 import com.model.User;
 import com.model.UserBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.chrome.ChromeOptions;
 import pageObjects.LoginPage;
 import pageObjects.MainPage;
 import pageObjects.RegisterPage;
@@ -19,6 +21,7 @@ public class ChromeRegisterTest {
 
     @Before
     public void openRegisterPage() {
+        ChromeOptions options = new ChromeOptions();
         registerPage = open(
                 "https://stellarburgers.nomoreparties.site/register",
                 RegisterPage.class);
@@ -39,6 +42,7 @@ public class ChromeRegisterTest {
         loginPage.setEmailAndPasswordFields(user.getEmail(), user.getPassword());
         loginPage.clickEnterButton();
         MainPage mainPage = page(MainPage.class);
+        mainPage.waitForLoadingPage();
         assertTrue(mainPage.isCreateOrderButtonDisplayed());
     }
 
@@ -52,6 +56,7 @@ public class ChromeRegisterTest {
         loginPage.setEmailAndPasswordFields(user.getEmail(), user.getPassword());
         loginPage.clickEnterButton();
         MainPage mainPage = page(MainPage.class);
+        mainPage.waitForLoadingPage();
         assertTrue(mainPage.isCreateOrderButtonDisplayed());
     }
 
