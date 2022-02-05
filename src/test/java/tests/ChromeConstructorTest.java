@@ -1,22 +1,16 @@
 package tests;
 
 import com.codeborne.selenide.*;
+import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import pageObjects.MainPage;
 
-import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 import static org.junit.Assert.assertTrue;
 
 public class ChromeConstructorTest {
     MainPage mainPage;
-
-    @BeforeClass
-    public static void setUpConfigurations() {
-        Configuration.browserSize = "1920x1080";
-    }
 
     @Before
     public void openMainPage() {
@@ -26,14 +20,21 @@ public class ChromeConstructorTest {
                 MainPage.class);
     }
 
+    @After
+    public void closePage (){
+        closeWindow();
+    }
+
     @Test
     public void ingredientsHeadingIsVisible() {
+        mainPage.waitForLoadingPage();
         ElementsCollection ingredientsTransitionPanel = mainPage.getIngredientsTransitionPanel();
         for (int i = ingredientsTransitionPanel.size()-1; i >= 0; i--) {
             SelenideElement ingredientTransition = ingredientsTransitionPanel.get(i);
-            ingredientTransition.shouldBe(and("can be clicked", visible, enabled)).click();
+            ingredientTransition.click();
 
             String ingredientName = ingredientTransition.getText();
+            assertTrue(mainPage.isIngredientSelected(ingredientName));
             assertTrue(mainPage.isIngredientHeadingVisible(ingredientName));
         }
     }
