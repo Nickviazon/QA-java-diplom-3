@@ -32,13 +32,11 @@ public class RegisterPage extends BasePage {
     private SelenideElement loginLink;
 
     public void setFields(String name, String email, String password) {
-        nameField.shouldBe(and("can be clicked", visible, enabled)).click();
+        nameField.click();
         nameField.sendKeys(name);
-        sleep(1000);
-        emailField.shouldBe(and("can be clicked", visible, enabled)).click();
+        emailField.click();
         emailField.sendKeys(email);
-        sleep(1000);
-        passwordField.shouldBe(and("can be clicked", visible, enabled)).click();
+        passwordField.click();
         passwordField.sendKeys(password);
     }
 
