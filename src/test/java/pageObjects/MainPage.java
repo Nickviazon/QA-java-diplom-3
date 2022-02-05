@@ -5,58 +5,29 @@ import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
+import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selenide.$;
+
 public class MainPage {
 
-    // Раздел "Булки" в панели выбора ингредиентов
-    @FindBy(how = How.XPATH, using = ".//div[span='Булки']")
-    private SelenideElement bunTransitionPanel;
-
-    // Раздел "Соусы" в панели выбора ингредиентов
-    @FindBy(how = How.XPATH, using = ".//div[span='Соусы']")
-    private SelenideElement sauceTransitionPanel;
-
-    // Раздел "Начинки" в панели выбора ингредиентов
-    @FindBy(how = How.XPATH, using = ".//div[span='Начинки']")
-    private SelenideElement fillingTransitionPanel;
-
-    // Раздел "Булки" в выборе ингредиентов
-    @FindBy(how = How.XPATH, using = ".//h2[text()='Булки']")
-    private SelenideElement bunHeading;
-
-    // Раздел "Соусы" в выборе ингредиентов
-    @FindBy(how = How.XPATH, using = ".//h2[text()='Соусы']")
-    private SelenideElement sauceHeading;
-
-    // Раздел "Начинки" в выборе ингредиентов
-    @FindBy(how = How.XPATH, using = ".//h2[text()='Начинки']")
-    private SelenideElement fillingHeading;
+    @FindBy(how = How.XPATH, using = ".//div[span[contains(@class, 'text')]]")
+    private ElementsCollection ingredientsTransitionPanel;
 
     // Кнопка входа
     @FindBy(how = How.XPATH, using = ".//button[contains(text(), 'Войти')]")
     private SelenideElement enterAccountButton;
 
-    public void clickBunTransitionPanel() {
-        bunTransitionPanel.click();
+
+    public ElementsCollection getIngredientsTransitionPanel() {
+        return ingredientsTransitionPanel;
     }
 
-    public void clickSauceTransitionPanel() {
-        sauceTransitionPanel.click();
+    public void clickToTransitionPanelElement(SelenideElement transitionPanelElement) {
+        transitionPanelElement.click();
     }
 
-    public void clickFillingTransitionPanel() {
-        fillingTransitionPanel.click();
-    }
-
-    public boolean isBunHeadingDisplayed() {
-        return bunHeading.isDisplayed();
-    }
-
-    public boolean isSauceHeadingDisplayed() {
-        return sauceHeading.isDisplayed();
-    }
-
-    public boolean isFillingHeadingDisplayed() {
-        return fillingHeading.isDisplayed();
+    public boolean isIngredientHeadingVisible(String ingredientName) {
+        return $(byXpath(String.format(".//h2[text()='%s']", ingredientName))).isDisplayed();
     }
 
     public void clickEnterAccountButton() {
