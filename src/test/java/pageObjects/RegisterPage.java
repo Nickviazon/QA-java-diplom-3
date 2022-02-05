@@ -1,22 +1,30 @@
 package pageObjects;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selenide.sleep;
+
 public class RegisterPage {
 
     // Поле ввода имени
-    @FindBy(how = How.XPATH, using = ".//div[label[text()='Имя']]")
+    @FindBy(how = How.XPATH, using = ".//div[label[text()='Имя']]/input")
     private SelenideElement nameField;
 
     // Поле ввода email
-    @FindBy(how = How.XPATH, using = ".//div[label[text()='Email']]")
+    @FindBy(how = How.XPATH, using = ".//div[label[text()='Email']]/input")
     private SelenideElement emailField;
 
     // Поле ввода пароля
     @FindBy(how = How.CSS, using = "div>input[name='Пароль']")
     private SelenideElement passwordField;
+
+    // Сообщение о некорректном вводе
+    @FindBy(how = How.CSS, using = "p.input__error")
+    private SelenideElement inputErrorMessage;
 
     // Кнопка регистрации
     @FindBy(how = How.XPATH, using = ".//button[text()='Зарегистрироваться']")
@@ -27,11 +35,13 @@ public class RegisterPage {
     private SelenideElement loginLink;
 
     public void setFields(String name, String email, String password) {
-        nameField.click();
+        nameField.shouldBe(and("can be clicked", visible, enabled)).click();
         nameField.sendKeys(name);
-        emailField.click();
+        sleep(1000);
+        emailField.shouldBe(and("can be clicked", visible, enabled)).click();
         emailField.sendKeys(email);
-        passwordField.click();
+        sleep(1000);
+        passwordField.shouldBe(and("can be clicked", visible, enabled)).click();
         passwordField.sendKeys(password);
     }
 
@@ -41,5 +51,9 @@ public class RegisterPage {
 
     public void clickLoginLink() {
         loginLink.click();
+    }
+
+    public boolean isInputErrorMessageVisible() {
+        return inputErrorMessage.isDisplayed();
     }
 }
