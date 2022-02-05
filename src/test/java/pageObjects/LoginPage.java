@@ -10,7 +10,7 @@ import java.time.Duration;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.sleep;
 
-public class LoginPage {
+public class LoginPage extends BasePage {
 
     // Поле ввода email
     @FindBy(how = How.XPATH, using = ".//div[label[text()='Email']]/input")
@@ -37,9 +37,9 @@ public class LoginPage {
 
     public void setEmailAndPasswordFields(String email, String password) {
         sleep(500);
-        emailField.shouldBe(and("can be clickable", visible, disabled), Duration.ofSeconds(2)).click();
+        emailField.click();
         activeEmailField.sendKeys(email);
-        passwordField.shouldBe(exist, Duration.ofSeconds(2)).click();
+        passwordField.click();
         passwordField.sendKeys(password);
     }
 

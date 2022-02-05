@@ -4,7 +4,7 @@ import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-public class PasswordRecoverPage {
+public class PasswordRecoverPage extends BasePage {
 
     // Поле ввода Email
     @FindBy(how = How.CSS, using = "div>input[name='name']")

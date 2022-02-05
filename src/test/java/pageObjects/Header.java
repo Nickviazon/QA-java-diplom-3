@@ -4,7 +4,7 @@ import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-public class Header {
+public class Header extends BasePage{
 
     // Кнопка "Конструктор"
     @FindBy(how = How.XPATH, using = ".//p[text()='Конструктор']")

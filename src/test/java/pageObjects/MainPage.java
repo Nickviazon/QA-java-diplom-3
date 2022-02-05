@@ -1,6 +1,6 @@
 package pageObjects;
 
-import com.codeborne.selenide.Condition;
+import com.Base;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,7 +11,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 
-public class MainPage {
+public class MainPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = ".//div[span[contains(@class, 'text')]]")
     private ElementsCollection ingredientsTransitionPanel;

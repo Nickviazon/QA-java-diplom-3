@@ -5,10 +5,7 @@ import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.sleep;
-
-public class RegisterPage {
+public class RegisterPage extends BasePage {
 
     // Поле ввода имени
     @FindBy(how = How.XPATH, using = ".//div[label[text()='Имя']]/input")
