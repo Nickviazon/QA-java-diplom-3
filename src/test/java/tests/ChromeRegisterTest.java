@@ -1,11 +1,10 @@
 package tests;
 
-import com.codeborne.selenide.Configuration;
+
 import com.model.User;
 import com.model.UserBuilder;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import pageObjects.LoginPage;
 import pageObjects.MainPage;
@@ -17,11 +16,6 @@ import static org.junit.Assert.assertTrue;
 public class ChromeRegisterTest {
 
     RegisterPage registerPage;
-
-    @BeforeClass
-    public static void setUpConfigurations() {
-        Configuration.browserSize = "1920x1080";
-    }
 
     @Before
     public void openRegisterPage() {
