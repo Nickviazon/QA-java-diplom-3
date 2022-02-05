@@ -1,6 +1,5 @@
 package pageObjects;
 
-import com.Base;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
