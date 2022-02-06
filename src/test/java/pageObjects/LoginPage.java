@@ -51,6 +51,12 @@ public class LoginPage extends BasePage {
         passwordField.setValue(password);
     }
 
+    public boolean isInputFieldsAndEnterButtonVisible() {
+        return emailField.shouldBe(exist).isDisplayed() &&
+                passwordField.shouldBe(exist).isDisplayed() &&
+                enterButton.shouldBe(exist).isDisplayed();
+    }
+
     public void clickEnterButton() {
         enterButton.shouldBe(exist).click();
     }
