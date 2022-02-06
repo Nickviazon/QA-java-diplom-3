@@ -1,6 +1,7 @@
 package tests;
 
 import com.codeborne.selenide.*;
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,6 +27,7 @@ public class ChromeConstructorTest {
     }
 
     @Test
+    @DisplayName("Заголовки ингридиентов отображаются в конструкторе заказа")
     public void ingredientsHeadingIsVisible() {
         mainPage.waitForLoadingPage();
         ElementsCollection ingredientsTransitionPanel = mainPage.getIngredientsTransitionPanel();

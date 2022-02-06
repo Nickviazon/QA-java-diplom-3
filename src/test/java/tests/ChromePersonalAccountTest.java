@@ -1,6 +1,7 @@
 package tests;
 
 import com.UserOperations;
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,6 +37,7 @@ public class ChromePersonalAccountTest {
     }
 
     @Test
+    @DisplayName("Переход в личный кабинет из главной страницы")
     public void enterToPersonalAccountFromMainPage() {
         MainPage mainPage = page(MainPage.class);
         assertTrue(mainPage.isCreateOrderButtonDisplayed());
@@ -52,6 +54,7 @@ public class ChromePersonalAccountTest {
     }
 
     @Test
+    @DisplayName("Переход в личный кабинет из ленты заказов")
     public void enterToPersonalAccountFromOrdersFeedPage() {
         MainPage mainPage = page(MainPage.class);
         assertTrue(mainPage.isCreateOrderButtonDisplayed());
@@ -72,6 +75,7 @@ public class ChromePersonalAccountTest {
     }
 
     @Test
+    @DisplayName("Переход в конструктор заказа из личного кабинета с помощью кнопки в шапке ")
     public void enterToMainPageFromPersonaAccountPageWithConstructorButton() {
         MainPage mainPage = page(MainPage.class);
         assertTrue(mainPage.isCreateOrderButtonDisplayed());
@@ -89,6 +93,7 @@ public class ChromePersonalAccountTest {
     }
 
     @Test
+    @DisplayName("Переход в конструктор заказа из личного кабинета с помощью лого в шапке")
     public void enterToMainPageFromPersonaAccountPageWithLogoButton() {
         MainPage mainPage = page(MainPage.class);
         assertTrue(mainPage.isCreateOrderButtonDisplayed());
@@ -106,6 +111,7 @@ public class ChromePersonalAccountTest {
     }
 
     @Test
+    @DisplayName("Выход из личного кабинета")
     public void exitCheckFromPersonalAccountPage() {
         MainPage mainPage = page(MainPage.class);
         assertTrue(mainPage.isCreateOrderButtonDisplayed());

@@ -4,6 +4,8 @@ package tests;
 import com.codeborne.selenide.Configuration;
 import com.model.User;
 import com.model.UserBuilder;
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,6 +35,7 @@ public class ChromeRegisterTest {
     }
 
     @Test
+    @DisplayName("Регистрация возможна если 6 знаков в пароле")
     public void registerIsPossibleWithin6CharactersInPassword() {
         User user = UserBuilder.createRandomUser(6 );
 
@@ -47,6 +50,7 @@ public class ChromeRegisterTest {
     }
 
     @Test
+    @DisplayName("Регистрация возможна если больше 6 знаков в пароле")
     public void registerIsPossibleWithinMore6CharactersInPassword() {
         User user = UserBuilder.createRandomUser(7 );
 
@@ -61,6 +65,8 @@ public class ChromeRegisterTest {
     }
 
     @Test
+    @DisplayName("Регистрация не возможна если в пароле меньше 6 знаков")
+    @Description("Регистрация не возможна если в пароле меньше 6 знаков. Отображается сообщение об ошибке ввода")
     public void registerIsImpossibleWithinLess6CharactersInPassword() {
         User user = UserBuilder.createRandomUser(5 );
 

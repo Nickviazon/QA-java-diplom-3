@@ -2,6 +2,7 @@ package pageObjects;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
@@ -32,6 +33,7 @@ public class LoginPage extends BasePage {
     @FindBy(how = How.CSS, using = "a[href='/forgot-password']")
     private SelenideElement forgotPasswordLink;
 
+    @Step("Поля email/пароль заполняются на странице входа")
     public void setEmailAndPasswordFields(String email, String password) {
         sleep(500);
         // борьба с автозаполнением данных у Ябраузера
@@ -51,20 +53,24 @@ public class LoginPage extends BasePage {
         passwordField.setValue(password);
     }
 
+    @Step("Проверка что поля ввода email/пароль, а также кнопка вохда отображаются")
     public boolean isInputFieldsAndEnterButtonVisible() {
         return emailField.shouldBe(exist).isDisplayed() &&
                 passwordField.shouldBe(exist).isDisplayed() &&
                 enterButton.shouldBe(exist).isDisplayed();
     }
 
+    @Step("Нажата кнопка входа на странице входа")
     public void clickEnterButton() {
         enterButton.shouldBe(exist).click();
     }
 
+    @Step("Нажата ссылка регистрации на странице входа")
     public void clickRegisterLink() {
         registerLink.click();
     }
 
+    @Step("Нажата ссылка \"Забыл пароль\" на странице входа")
     public void clickForgotPasswordLink() {
         forgotPasswordLink.click();
     }

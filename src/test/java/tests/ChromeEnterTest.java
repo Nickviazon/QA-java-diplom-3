@@ -1,6 +1,7 @@
 package tests;
 
 import com.UserOperations;
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,6 +37,7 @@ public class ChromeEnterTest {
     }
 
     @Test
+    @DisplayName("Пользователь может войти из главной страницы")
     public void userCanLoginFromMainPage() {
         mainPage.clickEnterAccountButton();
         LoginPage loginPage = page(LoginPage.class);
@@ -45,6 +47,7 @@ public class ChromeEnterTest {
     }
 
     @Test
+    @DisplayName("Пользователь может войти с помощью кнопки в шапке")
     public void userCanLoginFromHeaderAccountButton() {
         Header header = page(Header.class);
         header.clickAccountButton();
@@ -55,6 +58,7 @@ public class ChromeEnterTest {
     }
 
     @Test
+    @DisplayName("Пользователь может войти на странице регистрации с помощью ссылки на вход")
     public void userCanLoginFromRegisterPageWithLoginLink() {
         RegisterPage registerPage = open("https://stellarburgers.nomoreparties.site/register", RegisterPage.class);
         registerPage.clickLoginLink();
@@ -65,6 +69,7 @@ public class ChromeEnterTest {
     }
 
     @Test
+    @DisplayName("Пользователь может выйти на странице восставновления пароля с помощью ссылки на вход")
     public void userCanLoginFromPasswordRecoverPageWithLoginLink() {
         PasswordRecoverPage passwordRecoverPage = open(
                 "https://stellarburgers.nomoreparties.site/forgot-password",
