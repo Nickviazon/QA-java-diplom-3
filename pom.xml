@@ -86,6 +86,7 @@
                         </systemProperties>
                         <systemPropertyVariables>
                             <browser>chrome</browser>
+                            <url>https://stellarburgers.nomoreparties.site</url>
                         </systemPropertyVariables>
                     </configuration>
                     <dependencies>
