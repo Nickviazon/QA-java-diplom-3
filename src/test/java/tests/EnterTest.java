@@ -13,7 +13,7 @@ import java.util.Map;
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.Assert.assertTrue;
 
-public class ChromeEnterTest {
+public class EnterTest {
 
 
     MainPage mainPage;
@@ -24,6 +24,13 @@ public class ChromeEnterTest {
     public void openMainPage() {
         userOperations = new UserOperations();
         userData = userOperations.register();
+
+        String browserParameter = System.getProperty("browser");
+        if (browserParameter.equalsIgnoreCase("chrome")) {
+            System.setProperty("webdriver.chrome.driver", "src/test/resources/yandexdriver.exe");
+        } else if (browserParameter.equalsIgnoreCase("yandex")) {
+            System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+        }
 
         mainPage = open(
                 "https://stellarburgers.nomoreparties.site/",

@@ -13,7 +13,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class ChromePersonalAccountTest {
+public class PersonalAccountTest {
 
     UserOperations userOperations;
     Map<String, String> userData;
@@ -22,6 +22,13 @@ public class ChromePersonalAccountTest {
     public void openMainPage() {
         userOperations = new UserOperations();
         userData = userOperations.register();
+
+        String browserParameter = System.getProperty("browser");
+        if (browserParameter.equalsIgnoreCase("chrome")) {
+            System.setProperty("webdriver.chrome.driver", "src/test/resources/yandexdriver.exe");
+        } else if (browserParameter.equalsIgnoreCase("yandex")) {
+            System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+        }
 
         LoginPage loginPage = open(
                 "https://stellarburgers.nomoreparties.site/login",

@@ -10,11 +10,18 @@ import pageObjects.MainPage;
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.Assert.assertTrue;
 
-public class ChromeConstructorTest {
+public class ConstructorTest {
     MainPage mainPage;
 
     @Before
     public void openMainPage() {
+
+        String browserParameter = System.getProperty("browser");
+        if (browserParameter.equalsIgnoreCase("chrome")) {
+            System.setProperty("webdriver.chrome.driver", "src/test/resources/yandexdriver.exe");
+        } else if (browserParameter.equalsIgnoreCase("yandex")) {
+            System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+        }
 
         mainPage = open(
                 "https://stellarburgers.nomoreparties.site/",
