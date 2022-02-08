@@ -4,6 +4,7 @@ import com.UserOperations;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import pageObjects.*;
 
@@ -13,25 +14,23 @@ import static com.codeborne.selenide.Selenide.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class PersonalAccountTest {
+public class PersonalAccountTest extends AbstractBaseTest {
 
-    UserOperations userOperations;
-    Map<String, String> userData;
+    private UserOperations userOperations;
+    private Map<String, String> userData;
+
+    @BeforeClass
+    public static void setUpParameters() {
+        setBrowserFromParameters();
+    }
 
     @Before
-    public void openMainPage() {
+    public void setUp() {
         userOperations = new UserOperations();
         userData = userOperations.register();
 
-        String browserParameter = System.getProperty("browser");
-        if (browserParameter.equalsIgnoreCase("chrome")) {
-            System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-        } else if (browserParameter.equalsIgnoreCase("yandex")) {
-            System.setProperty("webdriver.chrome.driver", "src/test/resources/yandexdriver.exe");
-        }
-
         LoginPage loginPage = open(
-                "https://stellarburgers.nomoreparties.site/login",
+                baseUrl+loginPath,
                 LoginPage.class);
         loginPage.setEmailAndPasswordFields(userData.get("email"), userData.get("password"));
         loginPage.clickEnterButton();

@@ -1,15 +1,13 @@
 package tests;
 
-
-import com.codeborne.selenide.Configuration;
 import com.model.User;
 import com.model.UserBuilder;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
-import org.openqa.selenium.chrome.ChromeOptions;
 import pageObjects.LoginPage;
 import pageObjects.MainPage;
 import pageObjects.RegisterPage;
@@ -17,22 +15,19 @@ import pageObjects.RegisterPage;
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.Assert.assertTrue;
 
-public class RegisterTest {
+public class RegisterTest extends AbstractBaseTest {
 
-    RegisterPage registerPage;
+    private RegisterPage registerPage;
+
+    @BeforeClass
+    public static void setUpParameters() {
+        setBrowserFromParameters();
+    }
 
     @Before
-    public void openRegisterPage() {
-
-        String browserParameter = System.getProperty("browser");
-        if (browserParameter.equalsIgnoreCase("chrome")) {
-            System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-        } else if (browserParameter.equalsIgnoreCase("yandex")) {
-            System.setProperty("webdriver.chrome.driver", "src/test/resources/yandexdriver.exe");
-        }
-
+    public void openPage() {
         registerPage = open(
-                "https://stellarburgers.nomoreparties.site/register",
+                baseUrl+ registerPath,
                 RegisterPage.class);
     }
 

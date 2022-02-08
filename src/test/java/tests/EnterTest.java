@@ -4,6 +4,7 @@ import com.UserOperations;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import pageObjects.*;
 
@@ -13,28 +14,24 @@ import java.util.Map;
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.Assert.assertTrue;
 
-public class EnterTest {
+public class EnterTest extends AbstractBaseTest {
 
 
-    MainPage mainPage;
-    UserOperations userOperations;
-    Map<String, String> userData;
+    private MainPage mainPage;
+    private UserOperations userOperations;
+    private Map<String, String> userData;
+
+    @BeforeClass
+    public static void setUpParameters() {
+        setBrowserFromParameters();
+    }
 
     @Before
     public void openMainPage() {
         userOperations = new UserOperations();
         userData = userOperations.register();
 
-        String browserParameter = System.getProperty("browser");
-        if (browserParameter.equalsIgnoreCase("chrome")) {
-            System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-        } else if (browserParameter.equalsIgnoreCase("yandex")) {
-            System.setProperty("webdriver.chrome.driver", "src/test/resources/yandexdriver.exe");
-        }
-
-        mainPage = open(
-                "https://stellarburgers.nomoreparties.site/",
-                MainPage.class);
+        mainPage = open(baseUrl, MainPage.class);
     }
 
     @After
@@ -67,7 +64,7 @@ public class EnterTest {
     @Test
     @DisplayName("Пользователь может войти на странице регистрации с помощью ссылки на вход")
     public void userCanLoginFromRegisterPageWithLoginLink() {
-        RegisterPage registerPage = open("https://stellarburgers.nomoreparties.site/register", RegisterPage.class);
+        RegisterPage registerPage = open(baseUrl+registerPath, RegisterPage.class);
         registerPage.clickLoginLink();
         LoginPage loginPage = page(LoginPage.class);
         loginPage.setEmailAndPasswordFields(userData.get("email"), userData.get("password"));
@@ -79,7 +76,7 @@ public class EnterTest {
     @DisplayName("Пользователь может выйти на странице восставновления пароля с помощью ссылки на вход")
     public void userCanLoginFromPasswordRecoverPageWithLoginLink() {
         PasswordRecoverPage passwordRecoverPage = open(
-                "https://stellarburgers.nomoreparties.site/forgot-password",
+                baseUrl+forgotPasswordPass,
                 PasswordRecoverPage.class);
         passwordRecoverPage.clickLoginLink();
         LoginPage loginPage = page(LoginPage.class);

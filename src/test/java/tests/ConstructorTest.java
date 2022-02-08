@@ -4,28 +4,24 @@ import com.codeborne.selenide.*;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import pageObjects.MainPage;
 
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.Assert.assertTrue;
 
-public class ConstructorTest {
+public class ConstructorTest extends AbstractBaseTest {
     MainPage mainPage;
 
+    @BeforeClass
+    public static void setUpParameters() {
+        setBrowserFromParameters();
+    }
+
     @Before
-    public void openMainPage() {
-
-        String browserParameter = System.getProperty("browser");
-        if (browserParameter.equalsIgnoreCase("chrome")) {
-            System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-        } else if (browserParameter.equalsIgnoreCase("yandex")) {
-            System.setProperty("webdriver.chrome.driver", "src/test/resources/yandexdriver.exe");
-        }
-
-        mainPage = open(
-                "https://stellarburgers.nomoreparties.site/",
-                MainPage.class);
+    public void openPage() {
+        mainPage = open(baseUrl, MainPage.class);
     }
 
     @After
