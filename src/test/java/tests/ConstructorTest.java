@@ -18,9 +18,9 @@ public class ConstructorTest {
 
         String browserParameter = System.getProperty("browser");
         if (browserParameter.equalsIgnoreCase("chrome")) {
-            System.setProperty("webdriver.chrome.driver", "src/test/resources/yandexdriver.exe");
-        } else if (browserParameter.equalsIgnoreCase("yandex")) {
             System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+        } else if (browserParameter.equalsIgnoreCase("yandex")) {
+            System.setProperty("webdriver.chrome.driver", "src/test/resources/yandexdriver.exe");
         }
 
         mainPage = open(
